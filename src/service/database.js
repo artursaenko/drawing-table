@@ -1,6 +1,8 @@
 import { initializeApp } from "firebase/app";
 import { firebaseConfig } from "@/config/firebase-config";
-import { getDatabase, set, ref, get } from "firebase/database";
+import { getDatabase, set, ref, get, onValue } from "firebase/database";
+
+import { getParams, addImageToCanvas, clearCanvas } from "../utils";
 
 initializeApp(firebaseConfig);
 const db = getDatabase();
@@ -25,4 +27,17 @@ export const sendData = (payload, data = {}) => {
   } catch (error) {
     throw new Error(error);
   }
+};
+
+const urlParams = getParams();
+export const getValue = () => {
+  onValue(ref(db, "room_" + urlParams), (snapshot) => {
+    const data = snapshot.val();
+    if (data) {
+      const { image, width, height } = data;
+      addImageToCanvas(image, width, height);
+    } else {
+      clearCanvas();
+    }
+  });
 };

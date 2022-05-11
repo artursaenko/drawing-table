@@ -17,3 +17,20 @@ export const getParams = () => {
   }
   return room;
 };
+
+let canvas = null;
+let ctx = null;
+
+export const addImageToCanvas = (url, w = 300, h = 300) => {
+  if (!canvas) canvas = document.querySelector(".canvas");
+  if (canvas && !ctx) ctx = canvas.getContext("2d");
+  let img = new Image();
+  img.src = url;
+  img.onload = function () {
+    ctx.drawImage(img, 0, 0, w, h);
+  };
+};
+
+export const clearCanvas = () => {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+};
