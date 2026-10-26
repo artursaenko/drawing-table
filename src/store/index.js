@@ -4,6 +4,7 @@ import { initializeApp } from "firebase/app";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { firebaseConfig } from "@/config/firebase-config";
 import { checkUserDetails } from "@/service/auth";
+import { isDemoRoom } from "@/utils";
 
 initializeApp(firebaseConfig);
 const auth = getAuth();
@@ -14,14 +15,17 @@ export default createStore({
     offsetY: 0,
     showForm: true,
     user: null,
+    demoTeacher: false,
     dragAndDropElement: false,
     editorSettings: {
       type: "",
     },
   },
   getters: {
+    // In the public demo room the teacher role can be tried without signing in
     GET_USER: (state) => {
-      return state.user;
+      if (state.user) return state.user;
+      return isDemoRoom() && state.demoTeacher ? { demo: true } : null;
     },
     GET_OFFSET_ELEMENT: (state) => {
       return {
@@ -42,6 +46,9 @@ export default createStore({
     },
     SET_USER: (state, payload) => {
       state.user = payload;
+    },
+    SET_DEMO_TEACHER: (state, payload) => {
+      state.demoTeacher = payload;
     },
     SET_DRAG_AND_DROP: (state, payload) => {
       state.dragAndDropElement = payload;

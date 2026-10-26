@@ -7,8 +7,10 @@
         @click="updateDrawing(option)"
         :disabled="option.disabled && !isUser"
         :class="{ current: option.current && editorSettings.type }"
+        :aria-label="t('tool_' + option.type)"
+        :title="t('tool_' + option.type)"
       >
-        <img :src="addImage(option.icon)" alt="images" width="40" />
+        <img :src="addImage(option.icon)" alt="" width="40" />
       </button>
     </li>
   </ul>
@@ -17,6 +19,7 @@
 <script>
 import { computed } from "vue";
 import { useStore } from "vuex";
+import { t } from "@/i18n";
 
 export default {
   name: "DrawingTools",
@@ -47,6 +50,7 @@ export default {
       editorSettings,
       option,
       isUser,
+      t,
     };
   },
 };

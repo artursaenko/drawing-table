@@ -1,7 +1,12 @@
 <template>
   <div class="wrapper" :class="{ 'is-hidden': isShowForm }">
     <form class="form" @submit.prevent="getData">
-      <button type="button" class="close-btn" @click="hiddenForm">
+      <button
+        type="button"
+        class="close-btn"
+        :aria-label="t('close')"
+        @click="hiddenForm"
+      >
         &#10006;
       </button>
       <div>
@@ -10,6 +15,7 @@
           required
           name="email"
           placeholder="Email"
+          aria-label="Email"
           class="input-elem"
           v-model.trim="email"
         />
@@ -19,13 +25,14 @@
           type="password"
           required
           name="password"
-          placeholder="password"
+          :placeholder="t('password')"
+          :aria-label="t('password')"
           class="input-elem"
           v-model.trim="password"
         />
       </div>
 
-      <button type="submit" class="send-btn">send</button>
+      <button type="submit" class="send-btn">{{ t("send") }}</button>
     </form>
   </div>
 </template>
@@ -34,6 +41,7 @@
 import { ref, computed } from "vue";
 import { useStore } from "vuex";
 import Notiflix from "notiflix";
+import { t } from "@/i18n";
 
 export default {
   name: "ModalForm",
@@ -56,10 +64,10 @@ export default {
           email: email.value,
         })
         .then(() => {
-          Notiflix.Notify.success("Привіт, викладач!");
+          Notiflix.Notify.success(t("welcome"));
         })
         .catch(() => {
-          Notiflix.Notify.warning("Упс! Щось пішло не так...");
+          Notiflix.Notify.warning(t("error"));
         })
         .finally(() => {
           hiddenForm();
@@ -68,7 +76,7 @@ export default {
 
     const isShowForm = computed(() => store.state.showForm);
 
-    return { hiddenForm, getData, email, password, isShowForm };
+    return { hiddenForm, getData, email, password, isShowForm, t };
   },
 };
 </script>

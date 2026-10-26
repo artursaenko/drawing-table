@@ -23,6 +23,3 @@ export const logOff = () => {
     .then(() => {})
     .catch(() => {});
 };
-
-//admin@gmail.com
-//admin123456
