@@ -7,6 +7,10 @@
       </div>
 
       <div class="header-actions">
+        <span class="sync" :class="{ online: connected }" role="status">
+          <span class="sync-dot" aria-hidden="true"></span>
+          {{ connected ? t("online") : t("offline") }}
+        </span>
         <div class="lang-switch" role="group" :aria-label="t('language')">
           <button
             v-for="code in languages"
@@ -35,10 +39,11 @@
 </template>
 
 <script>
-import { computed } from "vue";
+import { computed, ref } from "vue";
 import { useStore } from "vuex";
 
 import { logOff } from "@/service/auth";
+import { watchConnection } from "@/service/database";
 import { getParams, isDemoRoom } from "@/utils";
 import { t, lang, setLang, languages } from "@/i18n";
 
@@ -70,8 +75,12 @@ export default {
         store.dispatch("TOGGLE_SHOW_FORM", false);
       }
     };
+    const connected = ref(false);
+    watchConnection((value) => (connected.value = value));
+
     store.dispatch("GET_USER");
     return {
+      connected,
       toggleRole,
       title,
       textBtn,
@@ -93,13 +102,16 @@ export default {
   border-bottom: 1px solid #ececec;
   .container {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
+    gap: 12px;
   }
 }
 
 .header-actions {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 16px;
 }
@@ -124,6 +136,9 @@ export default {
 }
 
 .demo-hint {
+  width: auto;
+  max-width: 1200px;
+  flex-wrap: wrap;
   margin-top: 16px;
   padding: 12px 15px;
   background: #e8f2fd;
@@ -138,6 +153,24 @@ export default {
     font-weight: 600;
     white-space: nowrap;
   }
+}
+
+.sync {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  color: #8a2b2b;
+  &.online {
+    color: #1d6b3a;
+  }
+}
+
+.sync-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: currentColor;
 }
 
 .btn-auth {

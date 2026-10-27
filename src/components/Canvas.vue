@@ -25,6 +25,8 @@ import EditorBox from "@/components/EditorBox.vue";
 
 import { getData, sendData, getValue } from "@/service/database";
 import { getParams } from "@/utils";
+import Notiflix from "notiflix";
+import { t } from "@/i18n";
 
 export default {
   name: "Canvas",
@@ -72,13 +74,20 @@ export default {
       }
     });
 
+    const reportSyncError = (error) => {
+      console.error("Sync failed:", error);
+      Notiflix.Notify.failure(
+        t("syncError") + " (" + (error.code || error.message) + ")"
+      );
+    };
+
     const sendImage = () => {
       sendData(urlParams, {
         image: dataURL(),
         id: Date.now(),
         width: canvas.value.width,
         height: canvas.value.height,
-      });
+      }).catch(reportSyncError);
     };
 
     const addImageToCanvas = (
@@ -99,7 +108,7 @@ export default {
 
     const clearCanvas = () => {
       ctx.value.clearRect(0, 0, canvas.value.width, canvas.value.height);
-      sendData(urlParams, null);
+      sendData(urlParams, null).catch(reportSyncError);
     };
 
     const onResetClass = () => {
@@ -128,7 +137,7 @@ export default {
 
     onMounted(() => {
       ctx.value = canvas.value.getContext("2d");
-      getValue();
+      getValue(reportSyncError);
     });
 
     return {

@@ -21,23 +21,31 @@ export const getData = (payload) => {
     });
 };
 
+// Returns the promise so callers can show an error when the write is rejected
 export const sendData = (payload, data = {}) => {
-  try {
-    set(ref(db, "room_" + payload), data);
-  } catch (error) {
-    throw new Error(error);
-  }
+  return set(ref(db, "room_" + payload), data);
+};
+
+// Calls back with true/false whenever the realtime connection opens or drops
+export const watchConnection = (callback) => {
+  onValue(ref(db, ".info/connected"), (snapshot) => {
+    callback(snapshot.val() === true);
+  });
 };
 
 const urlParams = getParams();
-export const getValue = () => {
-  onValue(ref(db, "room_" + urlParams), (snapshot) => {
-    const data = snapshot.val();
-    if (data) {
-      const { image, width, height } = data;
-      addImageToCanvas(image, width, height);
-    } else {
-      clearCanvas();
-    }
-  });
+export const getValue = (onError = () => {}) => {
+  onValue(
+    ref(db, "room_" + urlParams),
+    (snapshot) => {
+      const data = snapshot.val();
+      if (data) {
+        const { image, width, height } = data;
+        addImageToCanvas(image, width, height);
+      } else {
+        clearCanvas();
+      }
+    },
+    onError
+  );
 };

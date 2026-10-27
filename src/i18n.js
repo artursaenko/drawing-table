@@ -25,6 +25,9 @@ const messages = {
     tool_circle: "Kreis",
     tool_delete: "Alles löschen",
     tool_download: "Herunterladen",
+    online: "Echtzeit verbunden",
+    offline: "Keine Verbindung",
+    syncError: "Synchronisierung fehlgeschlagen",
   },
   en: {
     room: "Room",
@@ -50,6 +53,9 @@ const messages = {
     tool_circle: "Circle",
     tool_delete: "Clear all",
     tool_download: "Download",
+    online: "Live sync on",
+    offline: "Offline",
+    syncError: "Sync failed",
   },
   uk: {
     room: "Кімната",
@@ -75,6 +81,9 @@ const messages = {
     tool_circle: "Коло",
     tool_delete: "Очистити все",
     tool_download: "Завантажити",
+    online: "З'єднано",
+    offline: "Немає з'єднання",
+    syncError: "Помилка синхронізації",
   },
 };
 
