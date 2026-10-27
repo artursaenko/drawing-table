@@ -30,10 +30,14 @@
       </div>
     </div>
     <div v-if="isDemo" class="container demo-hint">
-      <p>{{ t("demoHint") }}</p>
-      <a :href="secondWindowUrl" target="_blank" rel="noopener">{{
-        t("openSecond")
-      }}</a>
+      <p>{{ demoHint }}</p>
+      <a
+        v-if="!isSecondWindow"
+        :href="secondWindowUrl"
+        target="_blank"
+        rel="noopener"
+        >{{ t("openSecond") }}</a
+      >
     </div>
   </header>
 </template>
@@ -64,7 +68,15 @@ export default {
       }
       return isUser.value ? t("logout") : t("login");
     });
-    const secondWindowUrl = location.pathname + "?room=demo";
+    // The second window is marked so it can explain the student view
+    const isSecondWindow =
+      new URLSearchParams(location.search).get("view") === "student";
+    const secondWindowUrl = location.pathname + "?room=demo&view=student";
+    const demoHint = computed(() => {
+      if (!lang.value) return "";
+      if (isSecondWindow && !isUser.value) return t("demoHintStudent");
+      return isUser.value ? t("demoHintTeacher") : t("demoHint");
+    });
 
     const toggleRole = () => {
       if (isDemo && !store.state.user) {
@@ -87,6 +99,8 @@ export default {
       room,
       isDemo,
       secondWindowUrl,
+      isSecondWindow,
+      demoHint,
       t,
       lang,
       setLang,

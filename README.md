@@ -9,7 +9,7 @@ Meine Masterarbeit (M.Sc. Software- und Anwendungsentwicklung, 2024): ein Whiteb
 ## So testen Sie die Demo
 
 1. Öffnen Sie die Demo und klicken Sie auf **„Als Lehrende testen“**.
-2. Öffnen Sie über **„Zweites Fenster öffnen“** dieselbe Seite noch einmal. Dort bleiben Sie Studierende.
+2. Öffnen Sie über **„Zweites Fenster als Studierende öffnen“** dieselbe Seite noch einmal. Dort bleiben Sie Studierende.
 3. Fügen Sie im ersten Fenster Text, Formen oder ein Bild hinzu. Im zweiten Fenster erscheint es sofort.
 
 Die Oberfläche gibt es auf Deutsch, Englisch und Ukrainisch.
@@ -56,7 +56,7 @@ NODE_OPTIONS=--openssl-legacy-provider npm run build
 
 My master's thesis project (M.Sc. Software and Application Development, 2024): a whiteboard for online lessons. Teachers draw and write on a shared canvas, students see every change in real time.
 
-**Try it:** open the demo, click **"Try as teacher"**, then use **"Open second window"** to open the same room as a student. Anything you add in the first window appears in the second one instantly. The interface is available in German, English and Ukrainian.
+**Try it:** open the demo, click **"Try as teacher"**, then use **"Open second window as student"** to open the same room as a student. Anything you add in the first window appears in the second one instantly. The interface is available in German, English and Ukrainian.
 
 **Stack:** Vue 3, Vuex, Vue Router, Firebase Authentication and Realtime Database, Canvas API, SCSS.
 

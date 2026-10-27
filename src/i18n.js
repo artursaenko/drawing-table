@@ -10,8 +10,12 @@ const messages = {
     tryTeacher: "Als Lehrende testen",
     viewStudent: "Als Studierende ansehen",
     demoHint:
-      "Demo: Öffnen Sie diese Seite in einem zweiten Fenster. Was Sie hier als Lehrende zeichnen, erscheint dort in Echtzeit.",
-    openSecond: "Zweites Fenster öffnen",
+      "So testen Sie die Demo: 1) Klicken Sie hier auf „Als Lehrende testen“. 2) Öffnen Sie ein zweites Fenster, dort sind Sie Studierende. 3) Zeichnen Sie hier: Im zweiten Fenster erscheint alles sofort.",
+    demoHintTeacher:
+      "Sie sind jetzt Lehrende. Öffnen Sie ein zweites Fenster als Studierende und zeichnen Sie hier: Dort erscheint alles sofort.",
+    demoHintStudent:
+      "Dieses Fenster zeigt die Ansicht der Studierenden. Zeichnen Sie im ersten Fenster als Lehrende: Hier erscheint alles sofort.",
+    openSecond: "Zweites Fenster als Studierende öffnen",
     password: "Passwort",
     send: "Anmelden",
     close: "Schließen",
@@ -38,8 +42,12 @@ const messages = {
     tryTeacher: "Try as teacher",
     viewStudent: "View as student",
     demoHint:
-      "Demo: open this page in a second window. Whatever you draw here as a teacher appears there in real time.",
-    openSecond: "Open second window",
+      "How to try the demo: 1) Click “Try as teacher” here. 2) Open a second window, you are a student there. 3) Draw here and it appears in the second window instantly.",
+    demoHintTeacher:
+      "You are the teacher now. Open a second window as a student and draw here: everything appears there instantly.",
+    demoHintStudent:
+      "This window shows the student view. Draw in the first window as the teacher: everything appears here instantly.",
+    openSecond: "Open second window as student",
     password: "Password",
     send: "Sign in",
     close: "Close",
@@ -66,8 +74,12 @@ const messages = {
     tryTeacher: "Спробувати як викладач",
     viewStudent: "Дивитися як студент",
     demoHint:
-      "Демо: відкрийте цю сторінку в другому вікні. Те, що ви малюєте тут як викладач, з'являється там у реальному часі.",
-    openSecond: "Відкрити друге вікно",
+      "Як спробувати демо: 1) Натисніть тут «Спробувати як викладач». 2) Відкрийте друге вікно, там ви студент. 3) Малюйте тут, і в другому вікні все з’явиться миттєво.",
+    demoHintTeacher:
+      "Тепер ви викладач. Відкрийте друге вікно як студент і малюйте тут: там усе з’явиться миттєво.",
+    demoHintStudent:
+      "Це вікно показує те, що бачить студент. Малюйте в першому вікні як викладач, і тут усе з’явиться миттєво.",
+    openSecond: "Відкрити друге вікно як студент",
     password: "Пароль",
     send: "Увійти",
     close: "Закрити",
